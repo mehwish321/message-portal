@@ -1,0 +1,16 @@
+::ng-deep .mat-dialog-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+  }
+  
+  .message-list-container {
+    position: relative;
+  }
+  
+  .add-message-btn {
+    position: absolute;
+    right: 16px;
+    top: -40px;
+  }
