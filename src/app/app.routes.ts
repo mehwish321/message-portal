@@ -1,9 +1,7 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  // { path: '', loadComponent: () => import('./home/home.component').then(m => m.HomeComponent) },
-  { 
-    path: 'messages', 
-    loadChildren: () => import('./components/messages/messages.routes').then(m => m.messagesRoutes) 
-  }
+  { path: 'messages', loadChildren: () => import('./components/messages/messages.module').then(m => m.MessagesModule) },
+  { path: '', redirectTo: '/', pathMatch: 'full' }
+
 ];
