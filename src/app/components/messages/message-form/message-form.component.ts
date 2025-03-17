@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MessagesService } from '../services/messages.service';
 import { Message } from '../../models/message.model';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarService } from '../services/snack-bar.service';
 
 @Component({
   selector: 'app-message-page',
@@ -33,7 +33,7 @@ export class MessagePageComponent implements OnInit{
   constructor(
     private dialogRef: MatDialogRef<MessagePageComponent>,
     public fb: FormBuilder,
-    private snackBar: MatSnackBar,
+    private snackBar: SnackbarService,
     private messagesService: MessagesService
   ) {}
 
@@ -44,13 +44,6 @@ ngOnInit() {
   });
 }
 
-showSnackbar(message: string, action: string = 'Close') {
-  this.snackBar.open(message, action, {
-    duration: 3000,
-    horizontalPosition: 'right',
-    verticalPosition: 'top'
-  });
-}
 closeDialog(): void {
   this.dialogRef.close();
 }
@@ -66,13 +59,13 @@ onSubmit() {
     };
 
     this.messagesService.addMessage(newMessage).then(() => {
-      this.showSnackbar('Message added successfully!', 'Close');
+      this.snackBar.showSnackbar('Message added!', 'Close');
       this.messageForm.reset();
       this.closeDialog();
       this.loading = false;
     }).catch((error) => {
       this.loading = false;
-      this.showSnackbar('Failed to add message. Try again.', 'Close');
+      this.snackBar.showSnackbar('Failed to add message. Try again.', 'Close');
       console.error('Error adding message: ', error);
     });
   }

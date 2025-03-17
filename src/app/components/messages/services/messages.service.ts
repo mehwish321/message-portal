@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, collectionData, query, deleteDoc, doc, orderBy, DocumentData, CollectionReference, Timestamp } from '@angular/fire/firestore';
-import { Observable, from } from 'rxjs';
+import { Firestore, collection, addDoc, collectionData, query,
+  deleteDoc, doc, orderBy, DocumentData, CollectionReference, Timestamp } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { Message } from '../../models/message.model';
 
 @Injectable({
@@ -23,7 +24,6 @@ export class MessagesService {
         ...message,
         timestamp: Timestamp.now(),
       });
-      console.log('Document written with ID: ', docRef.id);
     } catch (e) {
       console.error('Error adding document: ', e);
     }

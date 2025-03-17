@@ -10,11 +10,11 @@ import { Observable, Subscription } from 'rxjs';
 import { Message } from '../../models/message.model';
 import { MatDialog } from '@angular/material/dialog';
 import { MessagePageComponent } from '../message-form/message-form.component';
-import { Firestore } from '@angular/fire/firestore';
 import { DatePipe } from '../../../shared/pipes/date.pipe';
 import { Store } from '@ngrx/store';
 import { loadMessages } from '../../../store/actions';
 import { selectMessages, selectMessagesError, selectMessagesLoading } from '../../../store/messages.selectors';
+import { SnackbarService } from '../services/snack-bar.service';
 
 @Component({
   standalone: true,
@@ -39,7 +39,7 @@ export class MessagesListComponent implements OnInit {
   constructor(private messagesService: MessagesService,
     private dialog: MatDialog,
     private store: Store,
-    private firestore: Firestore
+    private snackBar: SnackbarService
   ) {
   }
 
@@ -101,7 +101,6 @@ export class MessagesListComponent implements OnInit {
       });
   
       dialogRef.afterClosed().subscribe(result => {
-        console.log('dialog closed');
       });
   }
   async deleteMessage(messageId: string) {
@@ -110,9 +109,10 @@ export class MessagesListComponent implements OnInit {
       try {
         await this.messagesService.deleteMessage(messageId);
         this.isLoading = false;
-        console.log('Message with ID ${messageId} deleted successfully.');
+        this.snackBar.showSnackbar('Messages deleted successfully!', 'Close');
       } catch (error) {
         this.isLoading = false;
+        this.snackBar.showSnackbar('Getting error while deleting message.', 'Close');
         console.error('Error deleting message:', error);
       }
     } else {
