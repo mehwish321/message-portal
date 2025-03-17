@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
+import { AppComponent } from './app.component';
 
 export const routes: Routes = [
-  { path: 'messages', loadChildren: () => import('./components/messages/messages.module').then(m => m.MessagesModule) },
-  { path: '', redirectTo: '/', pathMatch: 'full' }
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 
+  { path: 'messages', loadChildren: () => import('./components/messages/messages.module').then(m => m.MessagesModule) }
 ];

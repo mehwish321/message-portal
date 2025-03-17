@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -11,12 +11,4 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class AppComponent {
   title = 'message-crud';
-  constructor(private route: Router) {
-
-  }
-
-  navigateToMessages() {
-    this.route.navigate(['/messsages'])
-
-  }
 }
